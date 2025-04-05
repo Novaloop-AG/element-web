@@ -1,0 +1,61 @@
+name: build-element-app
+
+# run on branch release/healthchat
+on:
+    push:
+        branches:
+            - release/healthchat
+
+jobs:
+    build-element-app:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read # This is required to read the repo content
+            packages: write # This is required to push the Docker image
+            id-token: write # Required to get the certificate for the attestation
+            attestations: write # Required to push the attestation
+        env:
+            DOCKER_REGISTRY: "ghcr.io"
+            DOCKER_IMAGE: ${{ format('{0}/element-web', github.repository) }}
+            DOCKER_IMAGE_TAG: "healthchat-latest"
+            DOCKER_PUSH: true
+            DOCKER_SIGNING: false
+            FORCE_COLOR: 1
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0 # needed for docker-package to be able to calculate the version
+            - name: Log in to the Github Container registry
+              uses: docker/login-action@v3
+              with:
+                  registry: ${{ env.DOCKER_REGISTRY }}
+                  username: ${{ github.actor }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+            - name: Extract metadata (tags, labels) for Docker
+              id: metadata
+              uses: docker/metadata-action@v5
+              with:
+                  images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
+                  tags: |
+                      type=raw,value=${{ env.DOCKER_IMAGE_TAG }}
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v3
+            - name: Build and push Docker images
+              id: push
+              uses: docker/build-push-action@v6
+              with:
+                  context: .
+                  file: ./Dockerfile
+                  push: ${{ env.DOCKER_PUSH }}
+                  tags: ${{ steps.metadata.outputs.tags }}
+                  labels: ${{ steps.metadata.outputs.labels }}
+                  #cache-from: type=gha
+                  #cache-to: type=gha,mode=max
+
+            - name: Generate artifact attestation
+              if: ${{ env.DOCKER_SIGNING == 'true' }}
+              uses: actions/attest-build-provenance@v1
+              with:
+                  subject-name: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
+                  subject-digest: ${{ steps.push.outputs.digest }}
+                  push-to-registry: ${{ env.DOCKER_PUSH }}
