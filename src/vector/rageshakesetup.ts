@@ -3,7 +3,7 @@ Copyright 2024 New Vector Ltd.
 Copyright 2020 The Matrix.org Foundation C.I.C.
 Copyright 2018 New Vector Ltd
 
-SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
 
@@ -18,10 +18,11 @@ Please see LICENSE files in the repository root for full details.
  * from the rageshake.)
  */
 
-import * as rageshake from "matrix-react-sdk/src/rageshake/rageshake";
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import sendBugReport from "matrix-react-sdk/src/rageshake/submit-rageshake";
 import { logger } from "matrix-js-sdk/src/logger";
+
+import * as rageshake from "../rageshake/rageshake";
+import SdkConfig from "../SdkConfig";
+import sendBugReport from "../rageshake/submit-rageshake";
 
 export function initRageshake(): Promise<void> {
     // we manually check persistence for rageshakes ourselves

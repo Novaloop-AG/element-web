@@ -1,13 +1,13 @@
 /*
 Copyright 2024 New Vector Ltd.
 
-SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
 
-import { idbLoad } from "matrix-react-sdk/src/utils/StorageAccess";
-import { ACCESS_TOKEN_IV, tryDecryptToken } from "matrix-react-sdk/src/utils/tokens/tokens";
-import { buildAndEncodePickleKey } from "matrix-react-sdk/src/utils/tokens/pickling";
+import { idbLoad } from "../utils/StorageAccess";
+import { ACCESS_TOKEN_IV, tryDecryptToken } from "../utils/tokens/tokens";
+import { buildAndEncodePickleKey } from "../utils/tokens/pickling";
 
 const serverSupportMap: {
     [serverUrl: string]: {

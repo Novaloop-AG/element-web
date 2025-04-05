@@ -8,11 +8,13 @@
 
 #### develop
 
-The develop branch holds the very latest and greatest code we have to offer, as such it may be less stable. It corresponds to the develop.element.io CD platform.
+The develop branch holds the very latest and greatest code we have to offer, as such it may be less stable.
+It is auto-deployed on every commit to element-web or matrix-js-sdk to develop.element.io via GitHub Actions `build_develop.yml`.
 
 #### staging
 
 The staging branch corresponds to the very latest release regardless of whether it is an RC or not. Deployed to staging.element.io manually.
+It is auto-deployed on every release of element-web to staging.element.io via GitHub Actions `deploy.yml`.
 
 #### master
 
@@ -22,7 +24,7 @@ The master branch is the most stable as it is the very latest non-RC release. De
 
 <details><summary><h1>Versions</h1></summary><blockquote>
 
-The matrix-js-sdk follows semver, the matrix-react-sdk loosely follows semver, most releases for both will bump the minor version number.
+The matrix-js-sdk follows semver, most releases will bump the minor version number.
 Breaking changes will bump the major version number.
 Element Web & Element Desktop do not follow semver and always have matching version numbers. The patch version number is normally incremented for every release.
 
@@ -80,31 +82,30 @@ This label will automagically convert to `X-Release-Blocker` at the conclusion o
 
 <details><summary><h1>Repositories</h1></summary><blockquote>
 
-This release process revolves around our four main repositories:
+This release process revolves around our main repositories:
 
--   [Element Desktop](https://github.com/element-hq/element-desktop/)
--   [Element Web](https://github.com/element-hq/element-web/)
--   [Matrix React SDK](https://github.com/matrix-org/matrix-react-sdk/)
--   [Matrix JS SDK](https://github.com/matrix-org/matrix-js-sdk/)
+- [Element Desktop](https://github.com/element-hq/element-desktop/)
+- [Element Web](https://github.com/element-hq/element-web/)
+- [Matrix JS SDK](https://github.com/matrix-org/matrix-js-sdk/)
 
 We own other repositories, but they have more ad-hoc releases and are not part of the bi-weekly cycle:
 
--   https://github.com/matrix-org/matrix-web-i18n/
--   https://github.com/matrix-org/matrix-react-sdk-module-api
+- https://github.com/matrix-org/matrix-web-i18n/
+- https://github.com/matrix-org/matrix-react-sdk-module-api
 
 </blockquote></details>
 
 <details><summary><h1>Prerequisites</h1></summary><blockquote>
 
--   You must be part of the 2 Releasers GitHub groups:
-    -   <https://github.com/orgs/element-hq/teams/element-web-releasers>
-    -   <https://github.com/orgs/matrix-org/teams/element-web-releasers>
--   You will need access to the **VPN** ([docs](https://gitlab.matrix.org/new-vector/internal/-/wikis/SRE/Tailscale)) to be able to follow the instructions under Deploy below.
--   You will need the ability to **SSH** in to the production machines to be able to follow the instructions under Deploy below. Ensure that your SSH key has a non-empty passphrase, and you registered your SSH key with Ops. Log a ticket at https://github.com/matrix-org/matrix-ansible-private and ask for:
-    -   Two-factor authentication to be set up on your SSH key. (This is needed to get access to production).
-    -   SSH access to `horme` (staging.element.io and app.element.io)
-    -   Permission to sudo on horme as the user `element`
--   You need "**jumphost**" configuration in your local `~/.ssh/config`. This should have been set up as part of your onboarding.
+- You must be part of the 2 Releasers GitHub groups:
+    - <https://github.com/orgs/element-hq/teams/element-web-releasers>
+    - <https://github.com/orgs/matrix-org/teams/element-web-releasers>
+- You will need access to the **VPN** ([docs](https://gitlab.matrix.org/new-vector/internal/-/wikis/SRE/Tailscale)) to be able to follow the instructions under Deploy below.
+- You will need the ability to **SSH** in to the production machines to be able to follow the instructions under Deploy below. Ensure that your SSH key has a non-empty passphrase, and you registered your SSH key with Ops. Log a ticket at https://github.com/matrix-org/matrix-ansible-private and ask for:
+    - Two-factor authentication to be set up on your SSH key. (This is needed to get access to production).
+    - SSH access to `horme` (staging.element.io and app.element.io)
+    - Permission to sudo on horme as the user `element`
+- You need "**jumphost**" configuration in your local `~/.ssh/config`. This should have been set up as part of your onboarding.
 
 </blockquote></details>
 
@@ -117,18 +118,17 @@ flowchart TD
 
     subgraph Releasing
         R1[[Releasing matrix-js-sdk]]
-        R2[[Releasing matrix-react-sdk]]
-        R3[[Releasing element-web]]
-        R4[[Releasing element-desktop]]
+        R2[[Releasing element-web]]
+        R3[[Releasing element-desktop]]
 
-        R1 --> R2 --> R3 --> R4
+        R1 --> R2 --> R3
     end
 
-    R4 --> D1
+    R3 --> D1
 
     subgraph Deploying
         D1[\Deploy staging.element.io/]
-        D2[\Check dockerhub/]
+        D2[\Check docker build/]
         D3[\Deploy app.element.io/]
         D4[\Check desktop package/]
 
@@ -179,7 +179,7 @@ For security, you may wish to merge the security advisory private fork or apply 
 It is worth noting that at the end of the Final/Hotfix/Security release `staging` is merged to `master` which is merged back into `develop` -
 this means that any commit which goes to `staging` will eventually make its way back to the default branch.
 
--   [ ] The staging branch is prepared
+- [ ] The staging branch is prepared
 
 # Releasing
 
@@ -194,51 +194,48 @@ switched back to the version of the dependency from the master branch to not lea
 
 ### Matrix JS SDK
 
--   [ ] Check the draft release which has been generated by [the automation](https://github.com/matrix-org/matrix-js-sdk/actions/workflows/release-drafter.yml)
--   [ ] Make any changes to the release notes in the draft release as are necessary - **Do not click publish, only save draft**
--   [ ] Kick off a release using [the automation](https://github.com/matrix-org/matrix-js-sdk/actions/workflows/release.yml) - making sure to select the right type of release. For anything other than an RC: choose final. You should not need to ever switch off either of the Publishing options.
-
-### Matrix React SDK
-
--   [ ] Check the draft release which has been generated by [the automation](https://github.com/element-hq/matrix-react-sdk/actions/workflows/release-drafter.yml)
--   [ ] Make any changes to the release notes in the draft release as are necessary - **Do not click publish, only save draft**
--   [ ] Kick off a release using [the automation](https://github.com/element-hq/matrix-react-sdk/actions/workflows/release.yml) - making sure to select the right type of release. For anything other than an RC: choose final. You should not need to ever switch off either of the Publishing options.
+- [ ] Check the draft release which has been generated by [the automation](https://github.com/matrix-org/matrix-js-sdk/actions/workflows/release-drafter.yml)
+- [ ] Make any changes to the release notes in the draft release as are necessary - **Do not click publish, only save draft**
+- [ ] Kick off a release using [the automation](https://github.com/matrix-org/matrix-js-sdk/actions/workflows/release.yml) - making sure to select the right type of release. For anything other than an RC: choose final. You should not need to ever switch off either of the Publishing options.
 
 ### Element Web
 
--   [ ] Check the draft release which has been generated by [the automation](https://github.com/element-hq/element-web/actions/workflows/release-drafter.yml)
--   [ ] Make any changes to the release notes in the draft release as are necessary - **Do not click publish, only save draft**
--   [ ] Kick off a release using [the automation](https://github.com/element-hq/element-web/actions/workflows/release.yml) - making sure to select the right type of release. For anything other than an RC: choose final. You should not need to ever switch off either of the Publishing options.
+- [ ] Check the draft release which has been generated by [the automation](https://github.com/element-hq/element-web/actions/workflows/release-drafter.yml)
+- [ ] Make any changes to the release notes in the draft release as are necessary - **Do not click publish, only save draft**
+- [ ] Kick off a release using [the automation](https://github.com/element-hq/element-web/actions/workflows/release.yml) - making sure to select the right type of release. For anything other than an RC: choose final. You should not need to ever switch off either of the Publishing options.
 
 ### Element Desktop
 
--   [ ] Check the draft release which has been generated by [the automation](https://github.com/element-hq/element-desktop/actions/workflows/release-drafter.yml)
--   [ ] Make any changes to the release notes in the draft release as are necessary - **Do not click publish, only save draft**
--   [ ] Kick off a release using [the automation](https://github.com/element-hq/element-desktop/actions/workflows/release.yml) - making sure to select the right type of release. For anything other than an RC: choose final. You should not need to ever switch off either of the Publishing options.
+- [ ] Check the draft release which has been generated by [the automation](https://github.com/element-hq/element-desktop/actions/workflows/release-drafter.yml)
+- [ ] Make any changes to the release notes in the draft release as are necessary - **Do not click publish, only save draft**
+- [ ] Kick off a release using [the automation](https://github.com/element-hq/element-desktop/actions/workflows/release.yml) - making sure to select the right type of release. For anything other than an RC: choose final. You should not need to ever switch off either of the Publishing options.
 
 # Deploying
 
 We ship the SDKs to npm, this happens as part of the release process.
-We ship Element Web to dockerhub, `*.element.io`, and packages.element.io.
+We ship Element Web to dockerhub, ghcr.io, `*.element.io`, and packages.element.io.
 We ship Element Desktop to packages.element.io.
 
--   [ ] Check that element-web has shipped to dockerhub
--   [ ] Deploy staging.element.io. [See docs.](https://handbook.element.io/books/element-web-team/page/deploying-appstagingelementio)
--   [ ] Test staging.element.io
+- [ ] Check that element-web has shipped to dockerhub & ghcr.io
+- [ ] Check that the staging [deployment](https://github.com/element-hq/element-web/actions/workflows/deploy.yml) has completed successfully
+- [ ] Test staging.element.io
 
 For final releases additionally do these steps:
 
--   [ ] Deploy app.element.io. [See docs.](https://handbook.element.io/books/element-web-team/page/deploying-appstagingelementio)
--   [ ] Test app.element.io
--   [ ] Ensure Element Web package has shipped to packages.element.io
--   [ ] Ensure Element Desktop packages have shipped to packages.element.io
+- [ ] Deploy app.element.io. [See docs.](https://handbook.element.io/books/element-web-team/page/deploying-appstagingelementio)
+- [ ] Test app.element.io
+- [ ] Ensure Element Web package has shipped to packages.element.io
+- [ ] Ensure Element Desktop packages have shipped to packages.element.io
+
+If you need to roll back a deployment to staging.element.io,
+you can run the `deploy.yml` automation choosing an older tag which you wish to deploy.
 
 # Housekeeping
 
 We have some manual housekeeping to do in order to prepare for the next release.
 
--   [ ] Update topics using [the automation](https://github.com/element-hq/element-web/actions/workflows/update-topics.yaml). It will autodetect the current latest version. Don't forget the date you supply should be e.g. September 5th (including the "th") for the script to work.
--   [ ] Announce the release in [#element-web-announcements:matrix.org](https://matrix.to/#/#element-web-announcements:matrix.org)
+- [ ] Update topics using [the automation](https://github.com/element-hq/element-web/actions/workflows/update-topics.yaml). It will autodetect the current latest version. Don't forget the date you supply should be e.g. September 5th (including the "th") for the script to work.
+- [ ] Announce the release in [#element-web-announcements:matrix.org](https://matrix.to/#/#element-web-announcements:matrix.org)
 
 <details><summary>(show)</summary>
 
@@ -254,17 +251,15 @@ With wording like:
 
 For the first RC of a given release cycle do these steps:
 
--   [ ] Go to the [matrix-js-sdk Renovate dashboard](https://github.com/matrix-org/matrix-js-sdk/issues/2406) and click the checkbox to create/update its PRs.
+- [ ] Go to the [matrix-js-sdk Renovate dashboard](https://github.com/matrix-org/matrix-js-sdk/issues/2406) and click the checkbox to create/update its PRs.
 
--   [ ] Go to the [matrix-react-sdk Renovate dashboard](https://github.com/element-hq/matrix-react-sdk/issues/6) and click the checkbox to create/update its PRs.
+- [ ] Go to the [element-web Renovate dashboard](https://github.com/element-hq/element-web/issues/22941) and click the checkbox to create/update its PRs.
 
--   [ ] Go to the [element-web Renovate dashboard](https://github.com/element-hq/element-web/issues/22941) and click the checkbox to create/update its PRs.
+- [ ] Go to the [element-desktop Renovate dashboard](https://github.com/element-hq/element-desktop/issues/465) and click the checkbox to create/update its PRs.
 
--   [ ] Go to the [element-desktop Renovate dashboard](https://github.com/element-hq/element-desktop/issues/465) and click the checkbox to create/update its PRs.
-
--   [ ] Later, check back and merge the PRs that succeeded to build. The ones that failed will get picked up by the [maintainer](https://docs.google.com/document/d/1V5VINWXATMpz9UBw4IKmVVB8aw3CxM0Jt7igtHnDfSk/edit#).
+- [ ] Later, check back and merge the PRs that succeeded to build. The ones that failed will get picked up by the [maintainer](https://docs.google.com/document/d/1V5VINWXATMpz9UBw4IKmVVB8aw3CxM0Jt7igtHnDfSk/edit#).
 
 For final releases additionally do these steps:
 
--   [ ] Archive done column on the [team board](https://github.com/orgs/element-hq/projects/67/views/34) _Note: this should be automated_
--   [ ] Add entry to the [milestones diary](https://docs.google.com/document/d/1cpRFJdfNCo2Ps6jqzQmatzbYEToSrQpyBug0aP_iwZE/edit#heading=h.6y55fw4t283z). The document says only to add significant releases, but we add all of them just in case.
+- [ ] Archive done column on the [team board](https://github.com/orgs/element-hq/projects/67/views/34) _Note: this should be automated_
+- [ ] Add entry to the [milestones diary](https://docs.google.com/document/d/1cpRFJdfNCo2Ps6jqzQmatzbYEToSrQpyBug0aP_iwZE/edit#heading=h.6y55fw4t283z). The document says only to add significant releases, but we add all of them just in case.

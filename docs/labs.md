@@ -72,11 +72,6 @@ theme definition.
 
 For some sample themes, check out [aaronraimist/element-themes](https://github.com/aaronraimist/element-themes).
 
-## Dehydrated devices (`feature_dehydration`)
-
-Allows users to receive encrypted messages by creating a device that is stored
-encrypted on the server, as described in [MSC2697](https://github.com/matrix-org/matrix-doc/pull/2697).
-
 ## Live location sharing (`feature_location_share_live`) [In Development]
 
 Enables sharing your current location to the timeline, with live updates.
@@ -110,10 +105,6 @@ This is useful while we experiment with encryption and to make calling compatibl
 
 Enables rendering of MD / HTML in room topics.
 
-## New room header & details (`feature_new_room_decoration_ui`) [In Development]
-
-Refactors visually the room header and room sidebar
-
 ## Enable the notifications panel in the room header (`feature_notifications`)
 
 Unreliable in encrypted rooms.
@@ -121,3 +112,7 @@ Unreliable in encrypted rooms.
 ## Knock rooms (`feature_ask_to_join`) [In Development]
 
 Enables knock feature for rooms. This allows users to ask to join a room.
+
+## New room list (`feature_new_room_list`) [In Development]
+
+Enable the new room list that is currently in development.

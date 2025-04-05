@@ -1,7 +1,7 @@
 /*
 Copyright 2020-2024 New Vector Ltd.
 
-SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
 
@@ -24,14 +24,14 @@ describe("url_utils.ts", function () {
         });
     });
 
-    describe("parseQs", function () {
+    it("parseQs", function () {
         location.search = "?foo=bar";
         expect(parseQs(location)).toEqual({
             foo: "bar",
         });
     });
 
-    describe("parseQs with arrays", function () {
+    it("parseQs with arrays", function () {
         location.search = "?via=s1&via=s2&via=s2&foo=bar";
         expect(parseQs(location)).toEqual({
             via: ["s1", "s2", "s2"],

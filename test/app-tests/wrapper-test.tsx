@@ -3,19 +3,19 @@ Copyright 2024 New Vector Ltd.
 Copyright 2023 Mikhail Aheichyk
 Copyright 2023 Nordeck IT + Consulting GmbH.
 
-SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
 
 import React from "react";
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
 import fetchMock from "fetch-mock-jest";
-import { render, RenderResult, screen } from "@testing-library/react";
-import { ModuleRunner } from "matrix-react-sdk/src/modules/ModuleRunner";
-import { WrapperLifecycle, WrapperOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/WrapperLifecycle";
-import MatrixChat from "matrix-react-sdk/src/components/structures/MatrixChat";
+import { render, type RenderResult, screen } from "jest-matrix-react";
+import { WrapperLifecycle, type WrapperOpts } from "@matrix-org/react-sdk-module-api/lib/lifecycles/WrapperLifecycle";
 
+import SdkConfig from "../../src/SdkConfig";
+import PlatformPeg from "../../src/PlatformPeg";
+import { ModuleRunner } from "../../src/modules/ModuleRunner";
+import MatrixChat from "../../src/components/structures/MatrixChat";
 import WebPlatform from "../../src/vector/platform/WebPlatform";
 import { loadApp } from "../../src/vector/app";
 import { waitForLoadingSpinner, waitForWelcomeComponent } from "../test-utils";

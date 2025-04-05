@@ -2,14 +2,14 @@
 Copyright 2024 New Vector Ltd.
 Copyright 2023 Yorusaka Miyabi <shadowrz@disroot.org>
 
-SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
 
-import SdkConfig from "matrix-react-sdk/src/SdkConfig";
-import PlatformPeg from "matrix-react-sdk/src/PlatformPeg";
 import fetchMock from "fetch-mock-jest";
 
+import SdkConfig from "../../src/SdkConfig";
+import PlatformPeg from "../../src/PlatformPeg";
 import { loadApp } from "../../src/vector/app";
 import WebPlatform from "../../src/vector/platform/WebPlatform";
 

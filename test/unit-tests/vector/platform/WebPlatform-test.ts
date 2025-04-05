@@ -2,14 +2,14 @@
 Copyright 2024 New Vector Ltd.
 Copyright 2022 The Matrix.org Foundation C.I.C.
 
-SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
 Please see LICENSE files in the repository root for full details.
 */
 
 import fetchMock from "fetch-mock-jest";
-import { UpdateCheckStatus } from "matrix-react-sdk/src/BasePlatform";
-import { MatrixClientPeg } from "matrix-react-sdk/src/MatrixClientPeg";
 
+import { UpdateCheckStatus } from "../../../../src/BasePlatform";
+import { MatrixClientPeg } from "../../../../src/MatrixClientPeg";
 import WebPlatform from "../../../../src/vector/platform/WebPlatform";
 import { setupLanguageMock } from "../../../setup/setupLanguage";
 
@@ -97,7 +97,7 @@ describe("WebPlatform", () => {
             expect(new WebPlatform().maySendNotifications()).toBe(true);
         });
 
-        it("requests notification permissions and returns result ", async () => {
+        it("requests notification permissions and returns result", async () => {
             mockNotification.requestPermission.mockImplementation((callback) => callback("test"));
 
             const platform = new WebPlatform();
@@ -228,5 +228,19 @@ describe("WebPlatform", () => {
                 expect(showNoUpdate).not.toHaveBeenCalled();
             });
         });
+    });
+
+    it("should return config from config.json", async () => {
+        window.location.hostname = "domain.com";
+        fetchMock.get(/config\.json.*/, { brand: "test" });
+        const platform = new WebPlatform();
+        await expect(platform.getConfig()).resolves.toEqual(expect.objectContaining({ brand: "test" }));
+    });
+
+    it("should re-render favicon when setting error status", () => {
+        const platform = new WebPlatform();
+        const spy = jest.spyOn(platform.favicon, "badge");
+        platform.setErrorStatus(true);
+        expect(spy).toHaveBeenCalledWith(expect.anything(), { bgColor: "#f00" });
     });
 });

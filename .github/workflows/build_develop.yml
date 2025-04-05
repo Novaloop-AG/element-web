@@ -9,13 +9,18 @@ on:
 concurrency:
     group: ${{ github.repository_owner }}-${{ github.workflow }}-${{ github.ref_name }}
     cancel-in-progress: true
+permissions: {}
 jobs:
     build:
         name: "Build & Deploy develop.element.io"
         # Only respect triggers from our develop branch, ignore that of forks
         if: github.repository == 'element-hq/element-web'
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         environment: develop
+        permissions:
+            checks: read
+            pages: write
+            deployments: write
         env:
             R2_BUCKET: "element-web-develop"
             R2_URL: ${{ vars.CF_R2_S3_API }}
@@ -104,10 +109,11 @@ jobs:
             # We keep the latest develop.tar.gz on R2 instead of relying on the github artifact uploaded earlier
             # as the expires after 24h and requires auth to download.
             # Element Desktop's fetch script uses this tarball to fetch latest develop to build Nightlies.
+            # Checksum algorithm specified as per https://developers.cloudflare.com/r2/examples/aws/aws-cli/
             - name: Deploy to R2
               run: |
-                  aws s3 cp dist/develop.tar.gz s3://$R2_BUCKET/develop.tar.gz --endpoint-url $R2_URL --region=auto
-                  aws s3 cp _deploy/ s3://$R2_BUCKET/ --recursive --endpoint-url $R2_URL --region=auto
+                  aws s3 cp dist/develop.tar.gz s3://$R2_BUCKET/develop.tar.gz --endpoint-url $R2_URL --region=auto --checksum-algorithm CRC32
+                  aws s3 cp _deploy/ s3://$R2_BUCKET/ --recursive --endpoint-url $R2_URL --region=auto --checksum-algorithm CRC32
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.CF_R2_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.CF_R2_TOKEN }}
