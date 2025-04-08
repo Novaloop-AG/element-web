@@ -16,8 +16,8 @@ jobs:
             attestations: write # Required to push the attestation
         env:
             DOCKER_REGISTRY: "ghcr.io"
-            DOCKER_IMAGE: ${{ format('{0}/element-web', github.repository) }}
-            DOCKER_IMAGE_TAG: "healthchat-latest"
+            DOCKER_IMAGE: ${{ format('{0}/healthchat-web', github.repository) }}
+            DOCKER_IMAGE_TAG: "latest"
             DOCKER_PUSH: true
             DOCKER_SIGNING: false
             FORCE_COLOR: 1
@@ -38,6 +38,7 @@ jobs:
                   images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
                   tags: |
                       type=raw,value=${{ env.DOCKER_IMAGE_TAG }}
+                      type=raw,value=${{ github.sha }}
             - name: Set up Docker Buildx
               uses: docker/setup-buildx-action@v3
             - name: Build and push Docker images
