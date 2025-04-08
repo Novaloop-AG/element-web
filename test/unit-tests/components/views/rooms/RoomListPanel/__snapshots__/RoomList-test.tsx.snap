@@ -24,7 +24,8 @@ exports[`<RoomList /> should render a room list 1`] = `
         >
           <button
             aria-label="Open room room0"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 0px; width: 100%;"
             type="button"
@@ -70,7 +71,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room1"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 48px; width: 100%;"
             type="button"
@@ -116,7 +118,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room2"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 96px; width: 100%;"
             type="button"
@@ -162,7 +165,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room3"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 144px; width: 100%;"
             type="button"
@@ -208,7 +212,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room4"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 192px; width: 100%;"
             type="button"
@@ -254,7 +259,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room5"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 240px; width: 100%;"
             type="button"
@@ -300,7 +306,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room6"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 288px; width: 100%;"
             type="button"
@@ -346,7 +353,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room7"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 336px; width: 100%;"
             type="button"
@@ -392,7 +400,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room8"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 384px; width: 100%;"
             type="button"
@@ -438,7 +447,8 @@ exports[`<RoomList /> should render a room list 1`] = `
           </button>
           <button
             aria-label="Open room room9"
-            class="mx_RoomListItemView"
+            aria-selected="false"
+            class="mx_RoomListItemView mx_RoomListItemView_empty"
             role="gridcell"
             style="height: 48px; left: 0px; position: absolute; top: 432px; width: 100%;"
             type="button"
