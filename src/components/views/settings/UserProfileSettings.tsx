@@ -27,6 +27,7 @@ import AccessibleButton from "../elements/AccessibleButton";
 import LogoutDialog, { shouldShowLogoutDialog } from "../dialogs/LogoutDialog";
 import Modal from "../../../Modal";
 import defaultDispatcher from "../../../dispatcher/dispatcher";
+import ExtendedProfileSettings from "./ExtendedProfileSettings";
 
 const SpinnerToast: React.FC<{ children?: ReactNode }> = ({ children }) => (
     <>
@@ -234,6 +235,10 @@ const UserProfileSettings: React.FC<UserProfileSettingsProps> = ({
                 </Alert>
             )}
             {userIdentifier && <UsernameBox username={userIdentifier} />}
+
+            {/* Always display the Extended Profile Settings component */}
+            <ExtendedProfileSettings className="mx_UserProfileSettings_extendedProfile" />
+
             <Flex gap="var(--cpd-space-4x)" className="mx_UserProfileSettings_profile_buttons">
                 {externalAccountManagementUrl && (
                     <ManageAccountButton externalAccountManagementUrl={externalAccountManagementUrl} />

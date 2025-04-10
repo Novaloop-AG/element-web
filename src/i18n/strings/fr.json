@@ -2563,6 +2563,18 @@
         }
     },
     "settings": {
+        "extended_profile_settings": {
+            "additional_information": "Informations supplémentaires",
+            "professional_title": "Titre",
+            "specialization": "Spécialisation",
+            "address": "Adresse",
+            "website": "Site web",
+            "further_information": "Informations supplémentaires / qualifications",
+            "saving_profile": "Enregistrement des paramètres de profil étendus…",
+            "failed_to_load": "Erreur lors du chargement des paramètres de profil étendus.",
+            "failed_to_save": "Erreur lors de l'enregistrement des paramètres de profil étendus.",
+            "server_not_supported": "Le serveur d’accueil ne prend pas en charge les paramètres de profil étendus."
+        },
         "account": {
             "dialog_title": "<strong>Paramètres : </strong> Compte",
             "title": "Compte"

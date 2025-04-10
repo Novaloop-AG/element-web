@@ -2576,6 +2576,18 @@
         }
     },
     "settings": {
+        "extended_profile_settings": {
+            "additional_information": "Additional Information",
+            "professional_title": "Title",
+            "specialization": "Specialization",
+            "address": "Address",
+            "website": "Website",
+            "further_information": "Further Information / Qualifications",
+            "saving_profile": "Saving profile...",
+            "failed_to_load": "Failed to load extended profile settings.",
+            "failed_to_save": "Failed to save extended profile settings.",
+            "server_not_supported": "Your server does not support extended profile settings."
+        },
         "account": {
             "dialog_title": "<strong>Settings:</strong> Account",
             "title": "Account"

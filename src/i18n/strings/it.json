@@ -2175,6 +2175,18 @@
         }
     },
     "settings": {
+        "extended_profile_settings": {
+            "additional_information": "Informazioni aggiuntive",
+            "professional_title": "Titolo",
+            "specialization": "Specializzazione",
+            "address": "Indirizzo",
+            "website": "Sito web",
+            "further_information": "Ulteriori informazioni / dettagli",
+            "saving_profile": "Salvataggio del profilo esteso...",
+            "failed_to_load": "Impossibile caricare le impostazioni del profilo esteso.",
+            "failed_to_save": "Impossibile salvare le impostazioni del profilo esteso.",
+            "server_not_supported": "Il tuo server non supporta le impostazioni del profilo esteso."
+        },
         "all_rooms_home": "Mostra tutte le stanze nella pagina principale",
         "all_rooms_home_description": "Tutte le stanze in cui sei appariranno nella pagina principale.",
         "always_show_message_timestamps": "Mostra sempre l'orario dei messaggi",
