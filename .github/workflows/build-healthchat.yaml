@@ -1,4 +1,4 @@
-name: build-element-app
+name: build-healthchat-app
 
 # run on branch release/healthchat
 on:
@@ -7,7 +7,7 @@ on:
             - release/healthchat
 
 jobs:
-    build-element-app:
+    build-healthchat-app:
         runs-on: ubuntu-latest
         permissions:
             contents: read # This is required to read the repo content
