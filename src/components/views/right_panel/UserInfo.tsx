@@ -83,6 +83,7 @@ import { SdkContextClass } from "../../../contexts/SDKContext";
 import { Flex } from "../../utils/Flex";
 import CopyableText from "../elements/CopyableText";
 import { useUserTimezone } from "../../../hooks/useUserTimezone";
+import UserExtendedProfileInfo from "./UserExtendedProfileInfo";
 
 export interface IDevice extends Device {
     ambiguous?: boolean;
@@ -1498,6 +1499,7 @@ const UserInfo: React.FC<IProps> = ({ user, room, onClose, phase = RightPanelPha
                 devices={devices}
                 roomId={room?.roomId}
             />
+            {phase === RightPanelPhases.MemberInfo && <UserExtendedProfileInfo userId={member.userId} />}
         </>
     );
 

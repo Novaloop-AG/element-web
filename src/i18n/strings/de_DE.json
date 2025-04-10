@@ -3877,6 +3877,16 @@
         }
     },
     "user_info": {
+        "extended_profile": {
+            "header": "Weitere Informationen",
+            "title": "Titel",
+            "specialization": "Fachgebiet",
+            "address": "Adresse",
+            "website": "Webseite",
+            "further_info": "Weitere Infos / Qualifikationen",
+            "not_provided": "Nicht angegeben",
+            "error_loading_profile": "Fehler beim Laden des Profils"
+        },
         "admin_tools_section": "Administrationswerkzeuge",
         "ban_button_room": "Bannen",
         "ban_button_space": "Bannen",
