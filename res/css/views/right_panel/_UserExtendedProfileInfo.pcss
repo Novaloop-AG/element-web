@@ -1,0 +1,59 @@
+/*
+Copyright 2025 New Vector Ltd
+
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
+*/
+
+.mx_UserExtendedProfileInfo {
+    padding: 16px;
+    background-color: $system;
+}
+
+.mx_UserExtendedProfileInfo_loading {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.mx_UserExtendedProfileInfo_heading {
+    margin-bottom: 12px;
+}
+
+.mx_UserExtendedProfileInfo_content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.mx_UserExtendedProfileInfo_row {
+    display: flex;
+    gap: 16px;
+}
+
+.mx_UserExtendedProfileInfo_row .mx_UserExtendedProfileInfo_field {
+    flex: 1;
+}
+
+.mx_UserExtendedProfileInfo_field {
+    margin-bottom: 4px;
+}
+
+.mx_UserExtendedProfileInfo_label {
+    margin-bottom: 3px;
+    color: $tertiary-content;
+}
+
+.mx_UserExtendedProfileInfo_value {
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Dark theme specific styles */
+.mx_UserExtendedProfileInfo_value a {
+    color: $accent;
+    text-decoration: none;
+}
+
+.mx_UserExtendedProfileInfo_value a:hover {
+    text-decoration: underline;
+}

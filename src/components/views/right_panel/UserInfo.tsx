@@ -28,6 +28,7 @@ import { type IRightPanelCardState } from "../../../stores/right-panel/RightPane
 import PosthogTrackers from "../../../PosthogTrackers";
 import { UserInfoHeaderView } from "./user_info/UserInfoHeaderView";
 import { UserInfoBasicView } from "./user_info/UserInfoBasicView";
+import UserExtendedProfileInfo from "./UserExtendedProfileInfo";
 
 export interface IDevice extends Device {
     ambiguous?: boolean;
@@ -252,6 +253,7 @@ const UserInfo: React.FC<IProps> = ({ user, room, onClose, phase = RightPanelPha
                 devices={devices}
                 roomId={room?.roomId}
             />
+            {phase === RightPanelPhases.MemberInfo && <UserExtendedProfileInfo userId={member.userId} />}
         </>
     );
 

@@ -2167,6 +2167,16 @@
         }
     },
     "user_info": {
+        "extended_profile": {
+            "header": "Informazioni aggiuntive",
+            "title": "Titolo",
+            "specialization": "Specializzazione",
+            "address": "Indirizzo",
+            "website": "Sito web",
+            "further_info": "Ulteriori informazioni / qualifiche",
+            "not_provided": "Non fornito",
+            "error_loading_profile": "Errore nel caricamento del profilo"
+        },
         "admin_tools_section": "Administratoriaus įrankiai",
         "ban_button_room": "Užblokuoti iš kambario",
         "ban_button_space": "Užblokuoti iš erdvės",

@@ -3938,6 +3938,16 @@
         }
     },
     "user_info": {
+        "extended_profile": {
+            "header": "Informations supplémentaires",
+            "title": "Titre",
+            "specialization": "Spécialisation",
+            "address": "Adresse",
+            "website": "Site web",
+            "further_info": "Informations supplémentaires / qualifications",
+            "not_provided": "Non fourni",
+            "error_loading_profile": "Erreur lors du chargement du profil"
+        },
         "admin_tools_section": "Outils d’administration",
         "ban_button_room": "Bannir du salon",
         "ban_button_space": "Bannir de l'espace",

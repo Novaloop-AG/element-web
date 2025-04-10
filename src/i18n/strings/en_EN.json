@@ -3952,6 +3952,16 @@
         }
     },
     "user_info": {
+        "extended_profile": {
+            "header": "Additional infos",
+            "title": "Title",
+            "specialization": "Speciality",
+            "address": "Address",
+            "website": "Website",
+            "further_info": "Further infos / qualifications",
+            "not_provided": "Not provided",
+            "error_loading_profile": "Error loading profile"
+        },
         "admin_tools_section": "Admin Tools",
         "ban_button_room": "Ban from room",
         "ban_button_space": "Ban from space",
