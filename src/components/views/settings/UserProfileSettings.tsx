@@ -27,6 +27,7 @@ import LogoutDialog, { shouldShowLogoutDialog } from "../dialogs/LogoutDialog";
 import Modal from "../../../Modal";
 import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { Flex } from "../../utils/Flex";
+import ExtendedProfileSettings from "./ExtendedProfileSettings";
 
 const SpinnerToast: React.FC<{ children?: ReactNode }> = ({ children }) => (
     <>
@@ -123,6 +124,10 @@ const UserProfileSettings: React.FC<UserProfileSettingsProps> = ({
             try {
                 const mediaConfig = await client.getMediaConfig();
                 setMaxUploadSize(mediaConfig["m.upload.size"]);
+
+                // We no longer need to check if the feature is enabled via config
+                // because the ExtendedProfileSettings component now only checks
+                // server support for extended profiles
             } catch (e) {
                 logger.warn("Failed to get media config", e);
             }
@@ -234,6 +239,10 @@ const UserProfileSettings: React.FC<UserProfileSettingsProps> = ({
                 </Alert>
             )}
             {userIdentifier && <UsernameBox username={userIdentifier} />}
+
+            {/* Always display the Extended Profile Settings component */}
+            <ExtendedProfileSettings className="mx_UserProfileSettings_extendedProfile" />
+
             <Flex gap="var(--cpd-space-4x)" className="mx_UserProfileSettings_profile_buttons">
                 {externalAccountManagementUrl && (
                     <ManageAccountButton externalAccountManagementUrl={externalAccountManagementUrl} />
