@@ -1,0 +1,79 @@
+/*
+Copyright 2025 New Vector Ltd.
+
+SPDX-License-Identifier: AGPL-3.0-only OR GPL-3.0-only OR LicenseRef-Element-Commercial
+Please see LICENSE files in the repository root for full details.
+*/
+
+.mx_ExtendedProfileView {
+    /* Anpassung an das bestehende UserInfo Panel */
+    font-size: var(--cpd-font-size-body-sm);
+    padding: 0;
+
+    /* Styling für das Accordion */
+    .mx_ExtendedProfileView_accordion {
+        width: 100%;
+    }
+
+    /* Abstand zwischen den Feldern */
+    .mx_ExtendedProfileView_content {
+        padding: var(--cpd-space-2x) 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--cpd-space-4x);
+    }
+
+    /* Styling für die Felder */
+    .mx_ExtendedProfileView_field {
+        margin-bottom: var(--cpd-space-2x);
+
+        .mx_ExtendedProfileView_icon {
+            width: 20px;
+            height: 20px;
+            color: var(--cpd-color-icon-secondary);
+            flex-shrink: 0;
+        }
+    }
+
+    /* Labels und Werte */
+    .mx_ExtendedProfileView_label {
+        color: var(--cpd-color-text-secondary);
+        font-size: var(--cpd-font-size-body-xs);
+        margin-bottom: var(--cpd-space-1x);
+    }
+
+    .mx_ExtendedProfileView_value {
+        color: var(--cpd-color-text-primary);
+        word-break: break-word;
+
+        &.mx_ExtendedProfileView_multiline {
+            white-space: pre-line;
+            margin-top: var(--cpd-space-1x);
+        }
+    }
+
+    /* Spezielle Styles für Website-Links */
+    .mx_ExtendedProfileView_link {
+        color: var(--cpd-color-text-action-accent);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    /* Für Bereich "Weitere Informationen" */
+    .mx_ExtendedProfileView_further_info {
+        padding: var(--cpd-space-1x) 0;
+    }
+
+    /* Loading State */
+    .mx_ExtendedProfileView_loading {
+        padding: var(--cpd-space-4x) 0;
+    }
+
+    /* Error State */
+    .mx_ExtendedProfileView_error {
+        margin: var(--cpd-space-2x) 0;
+    }
+}
