@@ -65,6 +65,7 @@ import { SdkContextClass } from "../../../contexts/SDKContext";
 import { UserInfoAdminToolsContainer } from "./user_info/UserInfoAdminToolsContainer";
 import { PowerLevelSection } from "./user_info/UserInfoPowerLevels";
 import { UserInfoHeaderView } from "./user_info/UserInfoHeaderView";
+import UserExtendedProfileInfo from "./UserExtendedProfileInfo";
 
 export interface IDevice extends Device {
     ambiguous?: boolean;
@@ -731,6 +732,7 @@ const UserInfo: React.FC<IProps> = ({ user, room, onClose, phase = RightPanelPha
                 devices={devices}
                 roomId={room?.roomId}
             />
+            {phase === RightPanelPhases.MemberInfo && <UserExtendedProfileInfo userId={member.userId} />}
         </>
     );
 
