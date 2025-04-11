@@ -18,7 +18,6 @@ import { SdkContextClass } from "../../../contexts/SDKContext";
 import { Container } from "../right_panel/UserInfo";
 import InlineSpinner from "../elements/InlineSpinner";
 import {
-    EXT_PROFILE_KEY_ADDRESS,
     EXT_PROFILE_KEY_FURTHER_INFO,
     EXT_PROFILE_KEY_SPECIALIZATION,
     EXT_PROFILE_KEY_TITLE,
@@ -61,13 +60,11 @@ const ExtendedProfileView: React.FC<ExtendedProfileViewProps> = ({ userId }) => 
             const [
                 titleValue,
                 specializationValue,
-                addressValue,
                 websiteValue,
                 furtherInfoValue,
             ] = await Promise.all([
                 userProfilesStore.getOrFetchExtendedProfileProperty(userId, EXT_PROFILE_KEY_TITLE),
                 userProfilesStore.getOrFetchExtendedProfileProperty(userId, EXT_PROFILE_KEY_SPECIALIZATION),
-                userProfilesStore.getOrFetchExtendedProfileProperty(userId, EXT_PROFILE_KEY_ADDRESS),
                 userProfilesStore.getOrFetchExtendedProfileProperty(userId, EXT_PROFILE_KEY_WEBSITE),
                 userProfilesStore.getOrFetchExtendedProfileProperty(userId, EXT_PROFILE_KEY_FURTHER_INFO),
             ]);
@@ -75,7 +72,6 @@ const ExtendedProfileView: React.FC<ExtendedProfileViewProps> = ({ userId }) => 
             const data = {
                 title: titleValue as string | null,
                 specialization: specializationValue as string | null,
-                address: addressValue as string | null,
                 website: websiteValue as string | null,
                 furtherInfo: furtherInfoValue as string | null,
             };
