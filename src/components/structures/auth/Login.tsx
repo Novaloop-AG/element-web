@@ -538,12 +538,11 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                     </h1>
                     {errorTextSection}
                     {serverDeadSection}
-                    {/*JP: Disable server info*/}
-{/*                    <ServerPicker
+                    <ServerPicker
                         serverConfig={this.props.serverConfig}
                         onServerConfigChange={this.props.onServerConfigChange}
                         disabled={this.isBusy()}
-                    />*/}
+                    />
                     {this.renderLoginComponentForFlows()}
                     {footer}
                 </AuthBody>
