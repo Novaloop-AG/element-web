@@ -134,7 +134,8 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 "UserSettingsGeneral",
             ),
         );
-        tabs.push(
+        // JP: Disable session manager tab for now
+        /*tabs.push(
             new Tab(
                 UserTab.SessionManager,
                 _td("settings|sessions|title"),
@@ -142,7 +143,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 <SessionManagerTab showMsc4108QrCode={showMsc4108QrCode} />,
                 undefined,
             ),
-        );
+        );*/
         tabs.push(
             new Tab(
                 UserTab.Appearance,
@@ -221,12 +222,12 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 showSetupRecoveryIndicator ? "mx_SettingsDialog_tabLabelsAlert" : undefined,
             ),
         );
-
-        if (showLabsFlags() || SettingsStore.getFeatureSettingNames().some((k) => SettingsStore.getBetaInfo(k))) {
+        // JP: Disable labs tab for now
+        /*if (showLabsFlags() || SettingsStore.getFeatureSettingNames().some((k) => SettingsStore.getBetaInfo(k))) {
             tabs.push(
                 new Tab(UserTab.Labs, _td("common|labs"), <LabsIcon />, <LabsUserSettingsTab />, "UserSettingsLabs"),
             );
-        }
+        }*/
         if (mjolnirEnabled) {
             tabs.push(
                 new Tab(
@@ -238,7 +239,8 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 ),
             );
         }
-        tabs.push(
+        // JP: Disable help tab for now
+/*        tabs.push(
             new Tab(
                 UserTab.Help,
                 _td("setting|help_about|title"),
@@ -246,7 +248,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 <HelpUserSettingsTab />,
                 "UserSettingsHelpAbout",
             ),
-        );
+        );*/
 
         return tabs as NonEmptyArray<Tab<UserTab>>;
     };
