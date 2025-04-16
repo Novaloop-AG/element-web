@@ -266,7 +266,15 @@ export default function RoomHeader({
                     <button
                         aria-label={_t("right_panel|room_summary_card|title")}
                         tabIndex={0}
-                        onClick={() => RightPanelStore.instance.showOrHidePhase(RightPanelPhases.RoomSummary)}
+                        onClick={() => {
+                            if (isDirectMessage && dmMember) {
+                                RightPanelStore.instance.showOrHidePhase(RightPanelPhases.MemberInfo, {
+                                    member: dmMember,
+                                });
+                            } else {
+                                RightPanelStore.instance.showOrHidePhase(RightPanelPhases.RoomSummary);
+                            }
+                        }}
                         className="mx_RoomHeader_infoWrapper"
                     >
                         <Box flex="1" className="mx_RoomHeader_info">
