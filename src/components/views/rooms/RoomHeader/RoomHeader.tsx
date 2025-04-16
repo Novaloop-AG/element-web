@@ -423,7 +423,15 @@ export default function RoomHeader({
                         onClick={
                             room instanceof LocalRoom
                                 ? undefined
-                                : () => RightPanelStore.instance.showOrHidePhase(RightPanelPhases.RoomSummary)
+                                : () => {
+                                      if (isDirectMessage && dmMember) {
+                                          RightPanelStore.instance.showOrHidePhase(RightPanelPhases.MemberInfo, {
+                                              member: dmMember,
+                                          });
+                                      } else {
+                                          RightPanelStore.instance.showOrHidePhase(RightPanelPhases.RoomSummary);
+                                      }
+                                  }
                         }
                         className="mx_RoomHeader_infoWrapper"
                     >
