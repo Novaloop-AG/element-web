@@ -14,7 +14,6 @@ import { type Command, Commands, getCommand } from "../../src/SlashCommands";
 import { createTestClient } from "../test-utils";
 import { LocalRoom, LOCAL_ROOM_ID_PREFIX } from "../../src/models/LocalRoom";
 import SettingsStore from "../../src/settings/SettingsStore";
-import LegacyCallHandler from "../../src/LegacyCallHandler";
 import { SdkContextClass } from "../../src/contexts/SDKContext";
 import Modal from "../../src/Modal";
 import WidgetUtils from "../../src/utils/WidgetUtils";
@@ -22,6 +21,7 @@ import { WidgetType } from "../../src/widgets/WidgetType";
 import { warnSelfDemote } from "../../src/components/views/right_panel/UserInfo";
 import dispatcher from "../../src/dispatcher/dispatcher";
 import { SettingLevel } from "../../src/settings/SettingLevel";
+import ErrorDialog from "../../src/components/views/dialogs/ErrorDialog";
 
 jest.mock("../../src/components/views/right_panel/UserInfo");
 
@@ -196,46 +196,6 @@ describe("SlashCommands", () => {
         });
     });
 
-    describe("/tovirtual", () => {
-        beforeEach(() => {
-            command = findCommand("tovirtual")!;
-        });
-
-        describe("isEnabled", () => {
-            describe("when virtual rooms are supported", () => {
-                beforeEach(() => {
-                    jest.spyOn(LegacyCallHandler.instance, "getSupportsVirtualRooms").mockReturnValue(true);
-                });
-
-                it("should return true for Room", () => {
-                    setCurrentRoom();
-                    expect(command.isEnabled(client)).toBe(true);
-                });
-
-                it("should return false for LocalRoom", () => {
-                    setCurrentLocalRoom();
-                    expect(command.isEnabled(client)).toBe(false);
-                });
-            });
-
-            describe("when virtual rooms are not supported", () => {
-                beforeEach(() => {
-                    jest.spyOn(LegacyCallHandler.instance, "getSupportsVirtualRooms").mockReturnValue(false);
-                });
-
-                it("should return false for Room", () => {
-                    setCurrentRoom();
-                    expect(command.isEnabled(client)).toBe(false);
-                });
-
-                it("should return false for LocalRoom", () => {
-                    setCurrentLocalRoom();
-                    expect(command.isEnabled(client)).toBe(false);
-                });
-            });
-        });
-    });
-
     describe("/part", () => {
         it("should part room matching alias if found", async () => {
             const room1 = new Room("room-id", client, client.getSafeUserId());
@@ -291,6 +251,20 @@ describe("SlashCommands", () => {
             return expect(
                 command.run(client, roomId, null, "this is a test message").promise,
             ).resolves.toMatchSnapshot();
+        });
+    });
+
+    describe("/verify", () => {
+        it("should return usage if no args", () => {
+            const command = findCommand("verify")!;
+            expect(command.run(client, roomId, null, undefined).error).toBe(command.getUsage());
+        });
+
+        it("should show an error if device is not found", async () => {
+            const spy = jest.spyOn(Modal, "createDialog");
+            const command = findCommand("verify")!;
+            await command.run(client, roomId, null, "mydeviceid myfingerprint").promise;
+            expect(spy).toHaveBeenCalledWith(ErrorDialog, expect.objectContaining({ title: "Verification failed" }));
         });
     });
 
