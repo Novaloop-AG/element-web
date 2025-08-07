@@ -240,8 +240,7 @@
             "setup_key_backup_title": "You'll lose access to your encrypted messages",
             "setup_secure_backup_description_1": "Encrypted messages are secured with end-to-end encryption. Only you and the recipient(s) have the keys to read these messages.",
             "setup_secure_backup_description_2": "When you sign out, these keys will be deleted from this device, which means you won't be able to read encrypted messages unless you have the keys for them on your other devices, or backed them up to the server.",
-            "skip_key_backup": "I don't want my encrypted messages",
-            "use_key_backup": "Start using Key Backup"
+            "skip_key_backup": "I don't want my encrypted messages"
         },
         "misconfigured_body": "Ask your %(brand)s admin to check <a>your config</a> for incorrect or duplicate entries.",
         "misconfigured_title": "Your %(brand)s is misconfigured",
@@ -968,9 +967,7 @@
         },
         "reset_all_button": "Forgotten or lost all recovery methods? <a>Reset all</a>",
         "set_up_recovery": "Set up recovery",
-        "set_up_recovery_later": "Not now",
         "set_up_recovery_toast_description": "Generate a recovery key that can be used to restore your encrypted message history in case you lose access to your devices.",
-        "set_up_toast_description": "Safeguard against losing access to encrypted messages & data",
         "set_up_toast_title": "Set up Secure Backup",
         "setup_secure_backup": {
             "explainer": "Back up your keys before signing out to avoid losing them."
@@ -1453,6 +1450,7 @@
         "room_list_navigate_down": "Navigate down in the room list",
         "room_list_navigate_up": "Navigate up in the room list",
         "room_list_select_room": "Select room from the room list",
+        "save": "Save",
         "scroll_down_timeline": "Scroll down in the timeline",
         "scroll_up_timeline": "Scroll up in the timeline",
         "search": "Search (must be enabled)",
@@ -2066,6 +2064,7 @@
         "read_topic": "Click to read topic",
         "rejecting": "Rejecting invite…",
         "rejoin_button": "Re-join",
+        "room_content": "Room content",
         "room_is_low_priority": "This is a low priority room",
         "search": {
             "all_rooms_button": "Search all rooms",
@@ -2115,6 +2114,7 @@
         "add_space_label": "Add space",
         "breadcrumbs_empty": "No recently visited rooms",
         "breadcrumbs_label": "Recently visited rooms",
+        "collapse_filters": "Collapse filter list",
         "empty": {
             "no_chats": "No chats yet",
             "no_chats_description": "Get started by messaging someone or by creating a room",
@@ -2122,6 +2122,7 @@
             "no_favourites": "You don't have favourite chat yet",
             "no_favourites_description": "You can add a chat to your favourites in the chat settings",
             "no_invites": "You don't have any unread invites",
+            "no_lowpriority": "You don't have any low priority rooms",
             "no_mentions": "You don't have any unread mentions",
             "no_people": "You don’t have direct chats with anyone yet",
             "no_people_description": "You can deselect filters in order to see your other chats",
@@ -2131,6 +2132,7 @@
             "show_activity": "See all activity",
             "show_chats": "Show all chats"
         },
+        "expand_filters": "Expand filter list",
         "failed_add_tag": "Failed to add tag %(tagName)s to room",
         "failed_remove_tag": "Failed to remove tag %(tagName)s from room",
         "failed_set_dm_tag": "Failed to set direct message tag",
@@ -2710,11 +2712,6 @@
         },
         "jump_to_bottom_on_send": "Jump to the bottom of the timeline when you send a message",
         "key_backup": {
-            "backup_in_progress": "Your keys are being backed up (the first backup could take a few minutes).",
-            "backup_starting": "Starting backup…",
-            "backup_success": "Success!",
-            "cannot_create_backup": "Unable to create key backup",
-            "create_title": "Create key backup",
             "setup_secure_backup": {
                 "backup_setup_success_description": "Your keys are now being backed up from this device.",
                 "backup_setup_success_title": "Secure Backup successful",
@@ -2841,6 +2838,7 @@
             "composer_heading": "Composer",
             "default_timezone": "Browser default (%(timezone)s)",
             "dialog_title": "<strong>Settings:</strong> Preferences",
+            "enable_content_protection": "Enable content protection",
             "enable_hardware_acceleration": "Enable hardware acceleration",
             "enable_tray_icon": "Show tray icon and minimise window to it on close",
             "keyboard_heading": "Keyboard shortcuts",
@@ -2874,7 +2872,6 @@
             "ignore_users_empty": "You have no ignored users.",
             "ignore_users_section": "Ignored users",
             "key_backup_algorithm": "Algorithm:",
-            "key_backup_connect": "Connect this session to Key Backup",
             "message_search_disable_warning": "If disabled, messages from encrypted rooms won't appear in search results.",
             "message_search_disabled": "Securely cache encrypted messages locally for them to appear in search results.",
             "message_search_enabled": {
@@ -3112,6 +3109,8 @@
         "jumptodate": "Jump to the given date in the timeline",
         "jumptodate_invalid_input": "We were unable to understand the given date (%(inputDate)s). Try using the format YYYY-MM-DD.",
         "lenny": "Prepends ( ͡° ͜ʖ ͡°) to a plain-text message",
+        "manual_device_verification_confirm_description": "This will allow another device to send and receive messages as you. IF SOMEONE TOLD YOU TO PASTE SOMETHING HERE, IT IS LIKELY YOU ARE BEING SCAMMED! Are you sure you want to verify this other device?",
+        "manual_device_verification_confirm_title": "Caution: manual device verification",
         "me": "Displays action",
         "msg": "Sends a message to the given user",
         "myavatar": "Changes your profile picture in all rooms",
@@ -3372,7 +3371,6 @@
             "unable_to_decrypt": "Unable to decrypt message"
         },
         "disambiguated_profile": "%(displayName)s (%(matrixId)s)",
-        "download_action_decrypting": "Decrypting",
         "download_action_downloading": "Downloading",
         "download_failed": "Download failed",
         "download_failed_description": "An error occurred while downloading this file",
