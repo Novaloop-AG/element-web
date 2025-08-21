@@ -242,10 +242,16 @@ export default function RoomHeader({
         roomContext.mainSplitContentType === MainSplitContentType.Call;
 
     const onAvatarClick = (): void => {
-        defaultDispatcher.dispatch({
-            action: "open_room_settings",
-            initial_tab_id: RoomSettingsTab.General,
-        });
+        if (isDirectMessage && dmMember) {
+            RightPanelStore.instance.showOrHidePhase(RightPanelPhases.MemberInfo, {
+                member: dmMember,
+            });
+        } else {
+            defaultDispatcher.dispatch({
+                action: "open_room_settings",
+                initial_tab_id: RoomSettingsTab.General,
+            });
+        }
     };
 
     return (
