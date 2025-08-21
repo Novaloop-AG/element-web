@@ -394,10 +394,16 @@ export default function RoomHeader({
     const e2eStatus = useEncryptionStatus(client, room);
     const askToJoinEnabled = useFeatureEnabled("feature_ask_to_join");
     const onAvatarClick = (): void => {
-        defaultDispatcher.dispatch({
-            action: "open_room_settings",
-            initial_tab_id: RoomSettingsTab.General,
-        });
+        if (isDirectMessage && dmMember) {
+            RightPanelStore.instance.showOrHidePhase(RightPanelPhases.MemberInfo, {
+                member: dmMember,
+            });
+        } else {
+            defaultDispatcher.dispatch({
+                action: "open_room_settings",
+                initial_tab_id: RoomSettingsTab.General,
+            });
+        }
     };
 
     return (
