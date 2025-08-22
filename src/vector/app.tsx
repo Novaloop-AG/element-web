@@ -96,6 +96,14 @@ export async function loadApp(fragParams: QueryDict, matrixChatRef: React.Ref<Ma
     if (!autoRedirect && ssoRedirects.on_login_page && isLoginPage) {
         autoRedirect = true;
     }
+    
+    // If user has a session and is on welcome/landing, redirect to home
+    if (hasPossibleToken && isWelcomeOrLanding && !isReturningFromSso) {
+        logger.log("User has session, redirecting from welcome to home");
+        window.location.hash = "#/home";
+        // Continue loading the app normally
+    }
+    
     if (!hasPossibleToken && !isReturningFromSso && autoRedirect) {
         logger.log("Bypassing app load to redirect to SSO");
         const tempCli = createClient({
