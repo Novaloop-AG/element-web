@@ -134,8 +134,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 "UserSettingsGeneral",
             ),
         );
-        // JP: Disable session manager tab for now
-        /*tabs.push(
+        tabs.push(
             new Tab(
                 UserTab.SessionManager,
                 _td("settings|sessions|title"),
@@ -143,7 +142,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 <SessionManagerTab showMsc4108QrCode={showMsc4108QrCode} />,
                 undefined,
             ),
-        );*/
+        );
         tabs.push(
             new Tab(
                 UserTab.Appearance,
