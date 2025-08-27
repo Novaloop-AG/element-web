@@ -55,6 +55,9 @@ const showRevokeButton = (
     app: IWidget,
     userWidget: boolean | undefined,
 ): boolean => {
+    // Don't show revoke button for api.healthchat.ch widgets
+    if (app.url?.includes("api.healthchat.ch")) return false;
+
     const isAllowedWidget =
         (isAppWidget(app) &&
             app.eventId !== undefined &&

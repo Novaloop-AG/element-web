@@ -807,16 +807,19 @@ export default class AppTile extends React.Component<IProps, IState> {
                 </AccessibleButton>,
             );
 
-            layoutButtons.push(
-                <AccessibleButton
-                    key="minimise"
-                    className="mx_AppTileMenuBar_widgets_button"
-                    title={_t("action|minimise")}
-                    onClick={this.onMinimiseClicked}
-                >
-                    <MinusIcon className="mx_Icon mx_Icon_16" />
-                </AccessibleButton>,
-            );
+            // Don't show minimize button for api.healthchat.ch widgets
+            if (!this.props.app.url?.includes("api.healthchat.ch")) {
+                layoutButtons.push(
+                    <AccessibleButton
+                        key="minimise"
+                        className="mx_AppTileMenuBar_widgets_button"
+                        title={_t("action|minimise")}
+                        onClick={this.onMinimiseClicked}
+                    >
+                        <MinusIcon className="mx_Icon mx_Icon_16" />
+                    </AccessibleButton>,
+                );
+            }
         }
 
         return (
