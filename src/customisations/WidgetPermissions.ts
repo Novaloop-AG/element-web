@@ -13,4 +13,18 @@ import type { WidgetPermissionsCustomisations } from "@element-hq/element-web-mo
 
 // A real customisation module will define and export one or more of the
 // customisation points that make up the interface above.
-export const WidgetPermissionCustomisations: WidgetPermissionsCustomisations<Widget, Capability> = {};
+export const WidgetPermissionCustomisations: WidgetPermissionsCustomisations<Widget, Capability> = {
+    // Automatically approve all capabilities for widgets from api.healthchat.ch domain
+    preapproveCapabilities: async (
+        widget: Widget,
+        requestedCapabilities: Set<Capability>,
+    ): Promise<Set<Capability>> => {
+        // Check if the widget URL contains api.healthchat.ch
+        if (widget.templateUrl?.includes("api.healthchat.ch")) {
+            // Return all requested capabilities as approved
+            return new Set(requestedCapabilities);
+        }
+        // Return undefined to fall back to default behavior for other widgets
+        return undefined as any;
+    },
+};

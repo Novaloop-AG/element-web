@@ -104,6 +104,49 @@ export class ElementWidgetDriver extends WidgetDriver {
         // button if the widget says it supports screenshots.
         this.allowedCapabilities = new Set([MatrixCapabilities.Screenshots, ElementWidgetCapabilities.RequiresClient]);
 
+        // Auto-approve all capabilities for api.healthchat.ch widgets
+        if (this.forWidget.templateUrl?.includes("api.healthchat.ch")) {
+            // Add all common capabilities that HealthChat widgets might request
+            this.allowedCapabilities.add(MatrixCapabilities.AlwaysOnScreen);
+            this.allowedCapabilities.add(MatrixCapabilities.StickerSending);
+            this.allowedCapabilities.add(MatrixCapabilities.MSC3846TurnServers);
+            this.allowedCapabilities.add(MatrixCapabilities.MSC4157SendDelayedEvent);
+            this.allowedCapabilities.add(MatrixCapabilities.MSC4157UpdateDelayedEvent);
+            this.allowedCapabilities.add("visibility");
+
+            // Add timeline capabilities
+            if (inRoomId) {
+                this.allowedCapabilities.add(`org.matrix.msc2762.timeline:${inRoomId}`);
+            }
+
+            // Add common event capabilities
+            const eventTypes = [
+                EventType.RoomMessage,
+                EventType.RoomName,
+                EventType.RoomTopic,
+                EventType.RoomAvatar,
+                EventType.RoomMember,
+                EventType.RoomEncryption,
+                EventType.Sticker,
+                EventType.Reaction,
+                EventType.RoomRedaction,
+            ];
+
+            for (const eventType of eventTypes) {
+                // Add both send and receive capabilities for room events
+                this.allowedCapabilities.add(WidgetEventCapability.forRoomEvent(EventDirection.Send, eventType).raw);
+                this.allowedCapabilities.add(WidgetEventCapability.forRoomEvent(EventDirection.Receive, eventType).raw);
+                // Add receive capabilities for state events
+                this.allowedCapabilities.add(
+                    WidgetEventCapability.forStateEvent(EventDirection.Receive, eventType).raw,
+                );
+            }
+
+            // Add any other capabilities that might be requested
+            this.allowedCapabilities.add(ElementWidgetCapabilities.CanChangeViewedRoom);
+            this.allowedCapabilities.add(ElementWidgetCapabilities.RequiresClient);
+        }
+
         // Grant the permissions that are specific to given widget types
         if (WidgetType.JITSI.matches(this.forWidget.type) && forWidgetKind === WidgetKind.Room) {
             this.allowedCapabilities.add(MatrixCapabilities.AlwaysOnScreen);
@@ -573,6 +616,14 @@ export class ElementWidgetDriver extends WidgetDriver {
     }
 
     public async askOpenID(observer: SimpleObservable<IOpenIDUpdate>): Promise<void> {
+        // Auto-approve OpenID for api.healthchat.ch widgets
+        if (this.forWidget.templateUrl?.includes("api.healthchat.ch")) {
+            return observer.update({
+                state: OpenIDRequestState.Allowed,
+                token: await MatrixClientPeg.safeGet().getOpenIdToken(),
+            });
+        }
+
         const opts: ApprovalOpts = { approved: undefined };
         ModuleRunner.instance.invoke(WidgetLifecycle.IdentityRequest, opts, this.forWidget);
         if (opts.approved) {

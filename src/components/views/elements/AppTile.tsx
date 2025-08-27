@@ -193,6 +193,9 @@ export default class AppTile extends React.Component<IProps, IState> {
 
     // This is a function to make the impact of calling SettingsStore slightly less
     private hasPermissionToLoad = (props: IProps): boolean => {
+        // Auto-approve widgets from api.healthchat.ch domain
+        if (props.app.url?.includes("api.healthchat.ch")) return true;
+
         if (this.usingLocalWidget()) return true;
         if (!props.room) return true; // user widgets always have permissions
         const opts: ApprovalOpts = { approved: undefined };
