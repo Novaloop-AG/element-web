@@ -8,10 +8,10 @@ Please see LICENSE files in the repository root for full details.
 import React, { useCallback, useEffect, useState } from "react";
 import { logger } from "matrix-js-sdk/src/logger";
 import { Alert } from "@vector-im/compound-web";
-import GlobeIcon from "@vector-im/compound-design-tokens/assets/web/icons/globe";
-import LocationIcon from "@vector-im/compound-design-tokens/assets/web/icons/location";
-import BadgeIcon from "@vector-im/compound-design-tokens/assets/web/icons/badge";
-import StarIcon from "@vector-im/compound-design-tokens/assets/web/icons/star";
+import GlobeIcon from "@vector-im/compound-design-tokens/assets/web/icons/web-browser";
+import LocationIcon from "@vector-im/compound-design-tokens/assets/web/icons/location-pin";
+import BadgeIcon from "@vector-im/compound-design-tokens/assets/web/icons/user-profile";
+import StarIcon from "@vector-im/compound-design-tokens/assets/web/icons/favourite";
 
 import { _t } from "../../../languageHandler";
 import { SdkContextClass } from "../../../contexts/SDKContext";
@@ -23,7 +23,7 @@ import {
     EXT_PROFILE_KEY_TITLE,
     EXT_PROFILE_KEY_WEBSITE,
 } from "../settings/ExtendedProfileSettings";
-import { Flex } from "../../utils/Flex";
+import { Flex } from "@element-hq/web-shared-components";
 
 interface ExtendedProfileViewProps {
     userId: string;
@@ -69,9 +69,10 @@ const ExtendedProfileView: React.FC<ExtendedProfileViewProps> = ({ userId }) => 
                 userProfilesStore.getOrFetchExtendedProfileProperty(userId, EXT_PROFILE_KEY_FURTHER_INFO),
             ]);
 
-            const data = {
+            const data: ExtendedProfileData = {
                 title: titleValue as string | null,
                 specialization: specializationValue as string | null,
+                address: null, // Address not yet implemented
                 website: websiteValue as string | null,
                 furtherInfo: furtherInfoValue as string | null,
             };
@@ -110,7 +111,7 @@ const ExtendedProfileView: React.FC<ExtendedProfileViewProps> = ({ userId }) => 
                     title={_t("common|error")}
                     className="mx_ExtendedProfileView_error"
                 >
-                    {_t("Fehler beim Laden der Profilinformationen")}
+                    {_t("settings|extended_profile_settings|failed_to_load")}
                 </Alert>
             ) : hasData ? (
                 <div className="mx_ExtendedProfileView_content">
@@ -147,7 +148,7 @@ const ExtendedProfileView: React.FC<ExtendedProfileViewProps> = ({ userId }) => 
                             <Flex align="center" gap="var(--cpd-space-2x)">
                                 <LocationIcon className="mx_ExtendedProfileView_icon" />
                                 <div>
-                                    <div className="mx_ExtendedProfileView_label">{_t("settings|extended_profile_settings|address")}</div>
+                                    <div className="mx_ExtendedProfileView_label">{_t("settings|extended_profile_settings|business_city")}</div>
                                     <div className="mx_ExtendedProfileView_value">{profileData.address}</div>
                                 </div>
                             </Flex>
