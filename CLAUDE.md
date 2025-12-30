@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Prerequisites
 
-- Node.js >= 20.0.0
+- Node.js >= 22.18
 - Yarn 1.x (classic)
 
 ## Commands
@@ -97,6 +97,11 @@ Plugin architecture in `/src/modules/`:
 - Component files: UpperCamelCase, utilities: kebab-case
 - Use `Optional<T>` type instead of truly optional parameters when callers should explicitly acknowledge missing values
 - CSS class names must be prefixed with `mx_` and match component name (e.g., `mx_RoomTile`)
+- Import matrix-js-sdk via `matrix-js-sdk/src/matrix` only (not `matrix-js-sdk` or `matrix-js-sdk/src`)
+- Use `jest-matrix-react` instead of `@testing-library/react` for component tests
+- No `React.forwardRef` - use ref props directly instead
+- Use UIStore for window dimensions instead of `window.innerHeight`/`window.innerWidth`
+- Use Media helper for MXC URL handling instead of direct `mxcUrlToHttp` calls
 
 ### Linked Development with matrix-js-sdk
 For developing against local SDK changes:

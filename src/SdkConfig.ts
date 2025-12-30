@@ -16,7 +16,7 @@ import { type DeepReadonly, type Defaultize } from "./@types/common";
 
 // see element-web config.md for docs, or the IConfigOptions interface for dev docs
 export const DEFAULTS: DeepReadonly<IConfigOptions> = {
-    brand: "Element",
+    brand: "HealthChat",
     help_url: "https://element.io/help",
     help_encryption_url: "https://element.io/help#encryption",
     integrations_ui_url: "https://scalar.vector.im/",
@@ -39,7 +39,7 @@ export const DEFAULTS: DeepReadonly<IConfigOptions> = {
     // everyone's config which has the camelCase property because our default would
     // be preferred over their config.
     desktopBuilds: {
-        available: true,
+        available: false,
         // eslint-disable-next-line @typescript-eslint/no-require-imports
         logo: require("../res/img/element-desktop-logo.svg").default,
         url: "https://element.io/get-started",
@@ -52,7 +52,7 @@ export const DEFAULTS: DeepReadonly<IConfigOptions> = {
     },
 
     desktop_builds: {
-        available: true,
+        available: false,
         logo: "vector-icons/1024.png",
         url: "https://element.io/download",
         url_macos: "https://packages.element.io/desktop/install/macos/Element.dmg",
@@ -61,9 +61,9 @@ export const DEFAULTS: DeepReadonly<IConfigOptions> = {
         url_linux: "https://element.io/download#linux",
     },
     mobile_builds: {
-        ios: "https://apps.apple.com/app/vector/id1083446067",
-        android: "https://play.google.com/store/apps/details?id=im.vector.app",
-        fdroid: "https://f-droid.org/repository/browse/?fdid=im.vector.app",
+        ios: "https://apps.apple.com/ch/app/healthchat/id6743060078",
+        android: "https://play.google.com/store/apps/details?id=ch.healthchat.element",
+        fdroid: "",
     },
 };
 

@@ -44,17 +44,12 @@
     "related_applications": [
         {
             "platform": "play",
-            "url": "https://play.google.com/store/apps/details?id=im.vector.app",
-            "id": "im.vector.app"
-        },
-        {
-            "platform": "f-droid",
-            "url": "https://f-droid.org/repository/browse/?fdid=im.vector.app",
-            "id": "im.vector.app"
+            "url": "https://play.google.com/store/apps/details?id=ch.healthchat.element",
+            "id": "ch.healthchat.element"
         },
         {
             "platform": "itunes",
-            "url": "https://apps.apple.com/app/vector/id1083446067"
+            "url": "https://apps.apple.com/ch/app/healthchat/id6743060078"
         }
     ]
 }
