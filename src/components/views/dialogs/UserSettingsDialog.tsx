@@ -196,6 +196,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
             );
         }
 
+        /* JP: Disabled Security tab for HealthChat
         tabs.push(
             new Tab(
                 UserTab.Security,
@@ -205,6 +206,7 @@ export default function UserSettingsDialog(props: IProps): JSX.Element {
                 "UserSettingsSecurityPrivacy",
             ),
         );
+        */
 
         tabs.push(
             new Tab(
