@@ -2,13 +2,28 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Prerequisites
+
+- Node.js >= 20.0.0
+- Yarn 1.x (classic)
+
 ## Commands
+
+### Setup
+- `yarn install` - Install dependencies
+- Copy `config.sample.json` to `config.json` and configure (see docs/config.md)
 
 ### Development
 - `yarn start` - Run development server on http://localhost:8080
 - `yarn start:https` - Run development server with HTTPS
 - `yarn build` - Production build (outputs to webapp/)
 - `yarn dist` - Create distribution tarball
+
+**Linux note**: If builds fail silently or with `EMFILE: too many open files`, increase inotify limits:
+```bash
+sudo sysctl fs.inotify.max_user_watches=131072
+sudo sysctl fs.inotify.max_user_instances=512
+```
 
 ### Testing
 - `yarn test` - Run Jest unit tests
@@ -49,8 +64,8 @@ Components are organized in `/src/components/`:
 ### State Management
 Uses Flux architecture with:
 - Centralized dispatcher in `/src/dispatcher/`
-- Stores in `/src/stores/` as singletons
-- Actions dispatched through `dis.dispatch()`
+- Stores in `/src/stores/` as singletons (access via `FooStore.instance`)
+- Dispatch actions: `dis.dispatch({ action: Action.FOO, ...payload })` or `dis.fire(Action.FOO)` for action-only
 
 ### Styling
 - PostCSS files with `.pcss` extension
@@ -76,7 +91,19 @@ Plugin architecture in `/src/modules/`:
 
 ### Important Conventions
 - TypeScript strict mode - always use explicit types
-- Functional components with hooks preferred over class components
+- Functional components with hooks preferred over class components (except "structures" which use classes)
 - Translations use `_t()` function with hierarchical keys
 - 4-space indentation, 120 character line limit
 - Component files: UpperCamelCase, utilities: kebab-case
+- Use `Optional<T>` type instead of truly optional parameters when callers should explicitly acknowledge missing values
+- CSS class names must be prefixed with `mx_` and match component name (e.g., `mx_RoomTile`)
+
+### Linked Development with matrix-js-sdk
+For developing against local SDK changes:
+```bash
+# In matrix-js-sdk directory
+yarn link && yarn install
+
+# In element-web directory
+yarn link matrix-js-sdk && yarn install && yarn start
+```
